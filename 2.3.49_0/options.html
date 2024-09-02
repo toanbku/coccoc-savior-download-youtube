@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Savior options</title>
+<link href="././css/options.css" rel="stylesheet"></head>
+<body class="body">
+<div id="options"></div>
+<modal-container id="modal-container"></modal-container>
+<script type="text/mustache-template" id="options-template">
+    <h1>{{i18n_options_title}}</h1>
+    <main>
+        <article class="common-options">
+            <img class="banner" src="/images/options-banner.jpg" />
+            <section class="section">
+                <label class="form-control checkbox">
+                    <input type="checkbox" id="on-page-buttons" {{#onPageButtonsEnabled}}checked{{/onPageButtonsEnabled}}>
+                    <div>{{i18n_show_on_page_buttons}}</div>
+                </label>
+                <label class="form-control checkbox {{^onPageButtonsEnabled}}disabled{{/onPageButtonsEnabled}}">
+                    <input type="checkbox" id="detach-button" {{^onPageButtonsEnabled}}disabled{{/onPageButtonsEnabled}}
+                    {{#detachButtonEnabled}}checked{{/detachButtonEnabled}}>
+                    <div>{{i18n_show_detach_button}}</div>
+                </label>
+                <!--
+                    <label class="form-control checkbox {{^onPageButtonsEnabled}}disabled{{/onPageButtonsEnabled}}">
+                        <input type="checkbox" id="instant-button-download" {{^onPageButtonsEnabled}}disabled{{/onPageButtonsEnabled}}
+                        {{#instantDownload}}checked{{/instantDownload}}>
+                        <div>{{i18n_show_instant_download}}</div>
+                    </label>
+                -->
+                <label class="form-control checkbox">
+                    <input type="checkbox" id="one-click-download" {{#isOneClickEnabled}}checked{{/isOneClickEnabled}}>
+                    <div>{{i18n_one_click}}</div>
+                </label>
+                <label class="form-control checkbox">
+                    <input type="checkbox" id="show-3gp-ext" {{#show3gpExt}}checked{{/show3gpExt}}>
+                    <div>{{i18n_show_3gp}}</div>
+                </label>
+                <label class="form-control checkbox">
+                    <input type="checkbox" id="prefer-last-quality" {{#preferLastQuality}}checked{{/preferLastQuality}}>
+                    <div>{{i18n_prefer_last_quality}}</div>
+                </label>
+                <label class="form-control checkbox">
+                    <input type="checkbox" id="skipping-ads" {{#skippingAdsEnabled}}checked{{/skippingAdsEnabled}}>
+                    <div>
+                        {{i18n_skip_ads}}
+                        <small>{{i18n_skip_ads_desc}}</small>
+                    </div>
+                </label>
+            </section>
+
+            <hr class="divider" />
+
+            <section class="section form-group">
+                <div class="section--header">
+                    <h3 class="form-label">{{i18n_preferred_quality}}</h3>
+                </div>
+                <savior-row>
+                    {{#qLevels}}
+                    <label class="form-control radio">
+                        <input type="radio" name="optionsRadios" value="{{qLevelName}}" {{#isChecked}}checked{{/isChecked}}>
+                        <span>{{i18n_ql_title}}</span>
+                    </label>
+                    {{/qLevels}}
+                </savior-row>
+            </section>
+
+            <section class="section">
+                <div class="section--header">
+                    <h3>{{i18n_min_stream_szie}}</h3>
+                </div>
+                <div class="form-range form-control">
+                    <input type="range" id="min-stream-size" min="0" max="3048000" value="{{minStreamSize}}">
+                    <span id="min-stream-size-value">{{minStreamSizeValue}}</span>
+                </div>
+            </section>
+        </article>
+        <article class="section section-whitelist {{^onPageButtonsEnabled}}disabled{{/onPageButtonsEnabled}}">
+            <savior-row class="section--header">
+                <h3 class="form-label">{{i18n_site_hidden_widget_title}}</h3>
+                <button class="btn-outline" data-action="openAddPopup">
+                    <span>{{i18n_site_hidden_widget_btn_add}}</span>
+                </button>
+            </savior-row>
+            <div class="site-list" id="hide-widget-sites">
+                {{#hideWidgetSites}}
+                    <li class="item" data-item={{domain}}>
+                        <img class="item--favicon" src={{icon}} />
+                        <span class="item--domain">{{domain}}</span>
+                        <div class="item--action" data-action="delete">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.33333 15.5448L4.45514 14.6666L9.12181 9.99993L4.45514 5.33327L5.33333 4.45508L9.99999 9.12174L14.6667 4.45508L15.5448 5.33327L10.8782 9.99993L15.5448 14.6666L14.6667 15.5448L9.99999 10.8781L5.33333 15.5448Z" fill="#1A1C1E"/>
+                            </svg>
+                        </div>
+                    </li>
+                {{/hideWidgetSites}}
+                {{^hideWidgetSites}}
+                    <span class="site-list--empty">{{i18n_site_hidden_widget_list_empty}}</span>
+                {{/hideWidgetSites}}
+            </div>
+        </article>
+    </main>
+</script>
+<script type="text/mustache-template" id="modal-add-site-template">
+    <modal>
+        <modal-backdrop></modal-backdrop>
+        <form class="modal-body">
+            <modal-header>
+                <h2 class="modal-title">{{i18n_title}}</h2>
+            </modal-header>
+            <modal-content>
+                <p class="modal-desc">{{i18n_desc}}</p>
+                <div class="form-control">
+                    <fieldset>
+                        <legend for="modal-add-input">{{i18n_input_label}}</legend>
+                        <input type="text" id="modal-add-input" autofocus placeholder="{{i18n_input_placeholder}}" required />
+                    </fieldset>
+                    <p class="helper"></p>
+                </div>
+            </modal-content>
+            <modal-footer>
+                <button type="button" class="btn-text" data-action="secondary">
+                    <span>{{i18n_btn_close}}</span>
+                </button>
+                <button class="btn-primary" data-action="primary" type="submit">
+                    <span>{{i18n_btn_primary}}</span>
+                </button>
+            </modal-footer>
+        </form>
+    </modal>
+</script>
+<script type="text/javascript" src="./options.js"></script><script type="text/javascript" src="./common.js"></script></body>
+</html>

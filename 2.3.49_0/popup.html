@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title></title>
+<link href="././css/popup.css" rel="stylesheet"></head>
+<body class="body">
+<div id="welcome"></div>
+<div id="downloads" hidden></div>
+<div id="one-click-block" hidden></div>
+<div id="footer" hidden></div>
+
+
+<script type="text/mustache-template" id="list-template">
+    <div class="downloads-list dark-theme">
+        <h1>{{i18n_popup_title}}</h1>
+        <button id="popup-closer">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.07696 17.9163L7.75965 15.3778C7.53636 15.3031 7.30746 15.1983 7.07294 15.0637C6.83843 14.9291 6.62876 14.7849 6.44392 14.631L4.09296 15.6246L2.16992 12.2913L4.20357 10.7545C4.18433 10.6305 4.17071 10.5061 4.16269 10.3811C4.15468 10.2561 4.15067 10.1316 4.15067 10.0077C4.15067 9.88908 4.15468 9.76861 4.16269 9.64628C4.17071 9.52395 4.18433 9.39013 4.20357 9.24484L2.16992 7.70799L4.09296 4.39072L6.4359 5.3763C6.63676 5.21711 6.85124 5.07154 7.07934 4.93959C7.30745 4.80763 7.53155 4.70159 7.75163 4.62147L8.07696 2.08301H11.923L12.2404 4.62949C12.4904 4.72029 12.7166 4.82633 12.9191 4.94759C13.1215 5.06886 13.3259 5.21176 13.532 5.3763L15.907 4.39072L17.8301 7.70799L15.7644 9.26886C15.7943 9.40349 15.8106 9.52929 15.8133 9.64628C15.8159 9.76327 15.8173 9.88106 15.8173 9.99965C15.8173 10.1129 15.8146 10.228 15.8093 10.345C15.8039 10.462 15.7847 10.5958 15.7516 10.7465L17.8013 12.2913L15.8782 15.6246L13.532 14.623C13.3259 14.7876 13.1154 14.9331 12.9006 15.0597C12.6859 15.1863 12.4658 15.2897 12.2404 15.3698L11.923 17.9163H8.07696ZM10.0096 12.4996C10.703 12.4996 11.293 12.2563 11.7796 11.7697C12.2663 11.283 12.5096 10.693 12.5096 9.99965C12.5096 9.30629 12.2663 8.71629 11.7796 8.22963C11.293 7.74299 10.703 7.49968 10.0096 7.49968C9.30771 7.49968 8.71557 7.74299 8.23319 8.22963C7.75083 8.71629 7.50965 9.30629 7.50965 9.99965C7.50965 10.693 7.75083 11.283 8.23319 11.7697C8.71557 12.2563 9.30771 12.4996 10.0096 12.4996ZM10.0096 11.2497C9.66239 11.2497 9.36725 11.1281 9.12419 10.8851C8.88114 10.642 8.75961 10.3469 8.75961 9.99965C8.75961 9.65243 8.88114 9.35729 9.12419 9.11424C9.36725 8.87118 9.66239 8.74965 10.0096 8.74965C10.3568 8.74965 10.652 8.87118 10.895 9.11424C11.1381 9.35729 11.2596 9.65243 11.2596 9.99965C11.2596 10.3469 11.1381 10.642 10.895 10.8851C10.652 11.1281 10.3568 11.2497 10.0096 11.2497ZM9.16667 16.6663H10.8045L11.1042 14.4339C11.5294 14.3228 11.918 14.165 12.27 13.9604C12.6221 13.7558 12.9615 13.4927 13.2885 13.1711L15.359 14.0413L16.1795 12.6247L14.3718 11.2625C14.4412 11.0467 14.4885 10.8351 14.5136 10.6279C14.5387 10.4206 14.5513 10.2112 14.5513 9.99965C14.5513 9.78278 14.5387 9.57338 14.5136 9.37145C14.4885 9.16953 14.4412 8.96333 14.3718 8.75286L16.1955 7.37465L15.375 5.95799L13.2804 6.84101C13.0016 6.54292 12.6675 6.27957 12.278 6.05095C11.8886 5.82231 11.4947 5.66045 11.0962 5.56536L10.8333 3.33299H9.17948L8.90386 5.55734C8.47864 5.65777 8.08601 5.81162 7.72596 6.01888C7.36592 6.22615 7.02244 6.49324 6.69553 6.82018L4.62501 5.95799L3.80448 7.37465L5.60417 8.71601C5.53473 8.91365 5.48612 9.11931 5.45834 9.33299C5.43056 9.54667 5.41667 9.77156 5.41667 10.0077C5.41667 10.2246 5.43056 10.4372 5.45834 10.6455C5.48612 10.8538 5.53205 11.0595 5.59615 11.2625L3.80448 12.6247L4.62501 14.0413L6.68751 13.1663C7.00374 13.4911 7.34188 13.7571 7.70192 13.9644C8.06196 14.1717 8.45994 14.3309 8.89584 14.442L9.16667 16.6663Z" fill="currentColor"/>
+            </svg>
+        </button>
+        {{#downloads}}
+            {{>media_template}}
+        {{/downloads}}
+
+        {{^downloads}}
+        <div class="no-media">
+            {{i18n_no_media_found}}
+        </div>
+        {{/downloads}}
+    </div>
+
+    <template name="play-now-btn">
+        <svg class="play-now-play-icon with-txt" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.41171 3.33325C6.11775 3.33325 5.8294 3.41274 5.57765 3.5631C5.30283 3.71914 5.07527 3.94559 4.91883 4.21882C4.76207 4.4926 4.68255 4.80317 4.68855 5.1179L4.68855 14.8903C4.68255 15.205 4.76207 15.5156 4.91883 15.7894C5.07647 16.0647 5.30632 16.2925 5.58397 16.4487C5.82843 16.5871 6.1042 16.662 6.38566 16.6665L6.38836 16.6665C6.69761 16.6698 7.00127 16.585 7.26337 16.4223L15.4943 11.5337L15.5027 11.5285C15.7634 11.367 15.9785 11.1424 16.1276 10.8757C16.2767 10.609 16.3549 10.3091 16.3549 10.0041C16.3549 9.69915 16.2767 9.39921 16.1276 9.13251C15.9785 8.86582 15.7635 8.64109 15.5027 8.4796L7.25313 3.56752L7.25148 3.56652C6.99838 3.41395 6.70789 3.33325 6.41171 3.33325Z" fill="white"/>
+        </svg>
+        {{i18n_play_now}}
+    </template>
+    <!--<a href="#" id="close-popup" tabindex="-1">×</a>-->
+</script>
+<script type="text/mustache-template" id="welcome-template">
+    <div class="welcome">
+        <a href="#" id="close-popup" tabindex="-1">×</a>
+        <h1>{{i18n_welcome_title}}</h1>
+        <div class="welcome-text">{{i18n_welcome_text}}</div>
+        <div class="welcome-action">
+            <a href="#" class="btn" id="welcome-button">{{i18n_welcome_button}}</a>
+        </div>
+    </div>
+</script>
+<script type="text/mustache-template" id="one-click-template">
+    <svg width="20" height="20" class="loading-3-dots" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+    <span class="one-click-starting">{{i18n_starting_download}}</span>
+    {{#media}}
+    <span class="one-click-title-container">
+        <span class="one-click-title">"{{title}}"</span>
+    </span>
+    <div class="j-media-scope one-click-format">
+        <div class="select-wrapper">
+            <span class="select">
+                <span class="j-quality-option quality-option" data-quality="{{ext}}/{{quality}}">
+                    <span class="selected-type">{{i18n_type}}</span>
+                    <span class="quality-option-ext-quality">
+                        {{#i18n_quality}}
+                            {{i18n_quality}}
+                        {{/i18n_quality}}
+                        {{^i18n_quality}}
+                            {{#quality}}{{quality}}{{/quality}}
+                        {{/i18n_quality}}
+                    </span>
+                    <span class="file-size{{#size}} done{{/size}}">{{size}}</span>
+                </span>
+            </span>
+        </div>
+    </div>
+    {{/media}}
+</script>
+<script type="text/mustache-template" id="footer-template">
+	<div id="one-click" class="dark-theme">
+		<label id="one-click-label">
+			<input type="checkbox" class="j-one-click">
+			{{i18n_one_click}}
+		</label>
+
+		{{^oneClick}}
+		<div id="quality-level">
+			{{i18n_preferred_quality}}
+			<select id="quality-level-selection">
+				{{#quality_levels}}
+				<option value="{{name}}">{{i18n_ql_title}}</option>
+				{{/quality_levels}}
+			</select>
+		</div>
+		<span id="error-message">{{i18n_download_failed}}</span>
+		{{/oneClick}}
+	</div>
+</script>
+<script type="text/javascript" src="./popup.js"></script><script type="text/javascript" src="./common.js"></script></body>
+</html>
